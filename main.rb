@@ -1,6 +1,6 @@
 require_relative 'app'
 # rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/MethodLength
+
 def options
   puts 'Please enter the number for the task you want to perform'
   puts 'choose one of the following'
