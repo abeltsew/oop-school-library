@@ -5,7 +5,7 @@ class Rental
     @date = date
     @person = person
     @book = book
-    person.rentals << self unless person.rentals.include? self
-    book.rentals << self unless book.rentals.include? self
+    person.rentals << self 
+    book.rentals << self 
   end
 end
