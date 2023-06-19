@@ -52,4 +52,42 @@ class App
                 puts 'You have successfully registered a Teacher'
           end
         end
-end
+    def create_book
+        print "Title: "
+        title = gets.chomp
+        print "Author: "
+        author = gets.chomp
+        book = Book.new(title, author)
+        @books << book
+    end
+
+    def create_rental
+        unless @books.empty? || @people.empty? 
+            puts 'Select a book from the following list of number'
+            @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
+            selected_book = Integer(gets.chomp)
+      
+            puts 'Select a person from the following list of number (not ID)'
+            @people.each_with_index { |person, index| puts "#{index}) Name: #{person.name} Age: #{person.age} Id: #{person.id}"}
+            
+            selected_person = Integer(gets.chomp)
+      
+            puts 'Date: '
+            selected_date = gets.chomp.to_s
+      
+            rented = Rental.new(selected_date, @books[selected_book], @people[selected_person])
+            @rentals << rented
+      
+            puts 'Book was successfully rented.'
+        end
+    end
+    def list_rental
+        print 'Enter the Person ID: '
+        person_id = Integer(gets.chomp)
+        @rentals.each do |rent|
+            if rent.person.id == person_id
+              puts "Date: #{rent.date}, Book: #{rent.book.title} Author: #{rent.book.author}"
+            end
+          end
+    end
+    end

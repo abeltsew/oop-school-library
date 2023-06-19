@@ -10,7 +10,7 @@ class Person < Nameable
     @rentals = []
   end
   attr_reader :id
-  attr_accessor :name, :age
+  attr_accessor :name, :age, :rentals
 
   def can_use_service?
     of_age? || @parent_permission
@@ -20,7 +20,7 @@ class Person < Nameable
     @name
   end
 
-  def rentals(book, date)
+  def add_rental(book, date)
     Rental.new(date, book, self)
   end
 
