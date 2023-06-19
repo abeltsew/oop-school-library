@@ -7,44 +7,41 @@ require_relative 'teacher'
 require_relative 'app'
 
 def main
-    puts 'Welcome to the OOP Library'
-    app = App.new
-    loop do 
-  
-  puts  "Please enter the number for the task you want to perform" 
-  puts ""
-  puts 'choose one of the following'
-  puts "1 - List all books."
-  puts "2 - List all people."
-  puts "3 - Create a person (teacher or student)."
-  puts "4 - Create a book."
-  puts "5 - Create a rental."
-  puts "6 - List all rentals for a given person id."
-  puts "7 - Exit"
-  selected = Integer(gets.chomp) 
+  puts 'Welcome to the OOP Library'
+  app = App.new
+  loop do
+    puts 'Please enter the number for the task you want to perform'
+    puts ''
+    puts 'choose one of the following'
+    puts '1 - List all books.'
+    puts '2 - List all people.'
+    puts '3 - Create a person (teacher or student).'
+    puts '4 - Create a book.'
+    puts '5 - Create a rental.'
+    puts '6 - List all rentals for a given person id.'
+    puts '7 - Exit'
+    selected = Integer(gets.chomp)
 
-  case selected
-  when 1
-    app.list_books
-  when 2
-    app.list_people
-  
-when 3
-    app.create_person
+    case selected
+    when 1
+      app.list_books
+    when 2
+      app.list_people
 
-when 4
-    app.create_book
-when 5
-    app.create_rental
-  when 6
-    app.list_rental
-when 7
-    puts "Goodbye!"
-    exit
+    when 3
+      app.create_person
+
+    when 4
+      app.create_book
+    when 5
+      app.create_rental
+    when 6
+      app.list_rental
+    when 7
+      puts 'Goodbye!'
+      exit
+    end
   end
-
-end
-
 end
 
 main
