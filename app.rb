@@ -15,12 +15,20 @@ class App
     @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
   end
 
-  def create_person
-    print 'Do you want to create a new student (1) or teacher (2)? [Inout the number]: '
-    selected_person_type = Integer(gets.chomp)
-    case selected_person_type
-    when 1
-      print 'Age: '
+  def create_teacher
+    print "teacher's specialization: "
+      specialization = gets.chomp
+      print "teacher's age: "
+      age = gets.chomp
+      print "teacher's name: "
+      name = gets.chomp
+      teacher = Teacher.new(specialization, age, name, parent_permission: true)
+      @people << teacher
+      puts 'You have successfully registered a Teacher'
+  end
+
+  def create_student
+    print 'Age: '
       age = Integer(gets.chomp)
       print 'Name: '
       name = gets.chomp
@@ -39,17 +47,16 @@ class App
       end
 
       puts 'You have successfully registered a Student'
+    end
 
+  def create_person
+    print 'Do you want to create a new student (1) or teacher (2)? [Inout the number]: '
+    selected_person_type = Integer(gets.chomp)
+    case selected_person_type
+    when 1
+      create_student
     when 2
-      print "teacher's specialization: "
-      specialization = gets.chomp
-      print "teacher's age: "
-      age = gets.chomp
-      print "teacher's name: "
-      name = gets.chomp
-      teacher = Teacher.new(specialization, age, name, parent_permission: true)
-      @people << teacher
-      puts 'You have successfully registered a Teacher'
+      create_teacher
     end
   end
 

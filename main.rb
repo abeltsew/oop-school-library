@@ -19,7 +19,6 @@ def options
 end
 
 def main
-  puts 'Welcome to the OOP Library'
   app = App.new
   loop do
     options
@@ -39,7 +38,6 @@ def main
     when 6
       app.list_rental
     when 7
-      puts 'Goodbye!'
       exit
     end
   end
