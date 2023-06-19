@@ -23,7 +23,6 @@ def main
   loop do
     options
     selected = Integer(gets.chomp)
-
     case selected
     when 1
       app.list_books
