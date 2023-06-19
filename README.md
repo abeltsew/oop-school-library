@@ -29,8 +29,10 @@ After you're finished please remove all the comments and instructions!
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Install](#install)
+  - [Usage](#usage)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -74,6 +76,31 @@ To get a local copy up and running, follow these steps.
 ### Prerequisites
 
 In order to run this project you need: to install ruby
+
+### Setup
+
+Clone this repository to your desired folder:
+
+```sh
+  git clone https://github.com/abeltsew/oop-school-library.git
+```
+
+### Install
+
+Install this project with:
+
+```sh
+  cd my-project
+  gem install
+```
+
+### Usage
+
+To run the project, execute the following command:
+
+```sh
+  ruby main.rb
+```
 
 <!-- AUTHORS -->
 
