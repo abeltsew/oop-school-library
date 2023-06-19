@@ -1,3 +1,9 @@
+require_relative 'person'
+require_relative 'book'
+require_relative 'student'
+require_relative 'classroom'
+require_relative 'rental'
+require_relative 'teacher'
 require_relative 'app'
 
 def options
@@ -12,31 +18,53 @@ def options
   puts '7 - Exit'
 end
 
-def manage_options
-  selected = Integer(gets.chomp)
-  case selected
-  when 1
-    app.list_books
-  when 2
-    app.list_people
-  when 3
-    app.create_person
-  when 4
-    app.create_book
-  when 5
-    app.create_rental
-  when 6
-    app.list_rental
-  when 7
-    exit
-  end
+def handle_list_books(app)
+  app.list_books
+end
+
+def handle_list_people(app)
+  app.list_people
+end
+
+def handle_create_person(app)
+  app.create_person
+end
+
+def handle_create_book(app)
+  app.create_book
+end
+
+def handle_create_rental(app)
+  app.create_rental
+end
+
+def handle_list_rental(app)
+  app.list_rental
 end
 
 def main
-  App.new
+  app = App.new
   loop do
     options
-    manage_options
+    selected = Integer(gets.chomp)
+
+    case selected
+    when 1
+      handle_list_books(app)
+    when 2
+      handle_list_people(app)
+    when 3
+      handle_create_person(app)
+    when 4
+      handle_create_book(app)
+    when 5
+      handle_create_rental(app)
+    when 6
+      handle_list_rental(app)
+    when 7
+      puts 'Goodbye!'
+      exit
+    end
   end
 end
 
