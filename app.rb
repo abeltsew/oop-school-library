@@ -102,4 +102,21 @@ class App
       puts "Date: #{rent.date}, Book: #{rent.book.title} Author: #{rent.book.author}" if rent.person.id == person_id
     end
   end
+
+  def invalid_option
+    puts 'Invalid option'
+  end
+
+  def options
+  puts 'Please enter the number for the task you want to perform'
+  puts 'choose one of the following'
+  puts '1 - List all books.'
+  puts '2 - List all people.'
+  puts '3 - Create a person (teacher or student).'
+  puts '4 - Create a book.'
+  puts '5 - Create a rental.'
+  puts '6 - List all rentals for a given person id.'
+  puts '7 - Exit'
+  end
+
 end
