@@ -113,8 +113,7 @@ class App
     end
   end
 
-  def save_exit
-    puts 'Goodbye'
+  def save_books
     updated_books = []
 
     @books.each do |book|
@@ -122,7 +121,9 @@ class App
     end
 
     File.write('db/books.json', JSON.pretty_generate(updated_books))
+  end
 
+  def save_people
     updated_people = []
 
     @people.each do |person|
@@ -136,7 +137,9 @@ class App
     end
 
     File.write('db/people.json', JSON.pretty_generate(updated_people))
+  end
 
+  def save_rentals
     updated_rentals = []
 
     @rentals.each do |rental|
@@ -145,6 +148,16 @@ class App
     end
 
     File.write('db/rentals.json', JSON.pretty_generate(updated_rentals))
+  end
+
+  def save_exit
+    puts 'Goodbye'
+
+    save_books
+
+    save_people
+
+    save_rentals
 
     exit
   end
