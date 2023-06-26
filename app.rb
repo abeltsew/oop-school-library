@@ -61,7 +61,7 @@ class App
 
     selected_person = Integer(gets.chomp)
 
-    puts 'Date: '
+    puts 'Date MM/DD/YYYY : '
     selected_date = gets.chomp.to_s
 
     rented = Rental.new(selected_date, @books[selected_book], @people[selected_person])
@@ -80,11 +80,6 @@ class App
 
   def invalid_option
     puts 'Invalid option'
-  end
-
-  def save_exit
-    puts 'Saving'
-    # exit
   end
 
   def options
