@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "person_name": "Abel",
+    "book_titles": "The silent patient",
+    "date": "01/01/2018"
+  },
+  {
+    "person_name": "Rachel",
+    "book_titles": "The Gurdians",
+    "date": "12/12/2015"
+  }
+]
