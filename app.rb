@@ -2,8 +2,11 @@ require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'manage_people'
 
 class App
+  attr_accessor :books, :people, :rentals
+
   def initialize
     @books = []
     @people = []
@@ -16,40 +19,6 @@ class App
 
   def list_people
     @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-  end
-
-  def create_teacher
-    print "teacher's specialization: "
-    specialization = gets.chomp
-    print "teacher's age: "
-    age = gets.chomp
-    print "teacher's name: "
-    name = gets.chomp
-    teacher = Teacher.new(age, name, specialization, parent_permission: true)
-    @people << teacher
-    puts 'You have successfully registered a Teacher'
-  end
-
-  def create_student
-    print 'Age: '
-    age = Integer(gets.chomp)
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]'
-    parent_permission = gets.chomp.downcase
-
-    case parent_permission
-    when 'n'
-      student = Student.new(nil, age, name, parent_permission: false)
-      @people << student
-    when 'y'
-      student = Student.new(nil, age, name, parent_permission: true)
-      @people << student
-    else
-      'You have entered an invalid option'
-    end
-
-    puts 'You have successfully registered a Student'
   end
 
   def create_person
@@ -73,7 +42,13 @@ class App
   end
 
   def create_rental
-    return if @books.empty? || @people.empty?
+    if @books.empty?
+      puts 'No books created please create a book'
+      return
+    elsif @people.empty?
+      puts 'No people created please create a person'
+      return
+    end
 
     puts 'Select a book from the following list of number'
     @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
@@ -86,7 +61,7 @@ class App
 
     selected_person = Integer(gets.chomp)
 
-    puts 'Date: '
+    puts 'Date MM/DD/YYYY : '
     selected_date = gets.chomp.to_s
 
     rented = Rental.new(selected_date, @books[selected_book], @people[selected_person])
