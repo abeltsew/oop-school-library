@@ -140,7 +140,8 @@ class App
     updated_rentals = []
 
     @rentals.each do |rental|
-      updated_rentals << {'person_name' => rental.person.name, 'book_titles' => rental.book.title, 'date' => rental.date}
+      updated_rentals << { 'person_name' => rental.person.name, 'book_titles' => rental.book.title,
+                           'date' => rental.date }
     end
 
     File.write('db/rentals.json', JSON.pretty_generate(updated_rentals))
