@@ -42,7 +42,9 @@ class App
     end
 
     rentals.each do |rental|
-      @rentals << Rental.new(rental)
+      rentee = @people.select { |person| person.name == rental['person_name'] }
+      rented_book = @books.select { |book| book.title == rental['book_titles'] }
+      @rentals << Rental.new(rental['date'], rented_book[0], rentee[0])
     end
   end
 
@@ -134,6 +136,14 @@ class App
     end
 
     File.write('db/people.json', JSON.pretty_generate(updated_people))
+
+    updated_rentals = []
+
+    @rentals.each do |rental|
+      updated_rentals << {'person_name' => rental.person.name, 'book_titles' => rental.book.title, 'date' => rental.date}
+    end
+
+    File.write('db/rentals.json', JSON.pretty_generate(updated_rentals))
 
     exit
   end
