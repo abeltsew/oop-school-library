@@ -3,6 +3,7 @@ require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
 require_relative 'manage_people'
+require 'json'
 
 class App
   attr_accessor :books, :people, :rentals
@@ -11,6 +12,39 @@ class App
     @books = []
     @people = []
     @rentals = []
+  end
+
+  def fetch_data(file)
+    if File.exist?("db/#{file}.json")
+      File.read("db/#{file}.json")
+    else
+      empty_json = [].to_json
+      File.write("db/#{file}.json", empty_json)
+      empty_json
+    end
+  end
+
+  def load_data
+    books = JSON.parse(fetch_data('books'))
+    people = JSON.parse(fetch_data('people'))
+    rentals = JSON.parse(fetch_data('rentals'))
+
+    books.each do |book|
+      @books << Book.new(book['title'], book['author'])
+    end
+
+    people.each do |person|
+      if person.specialization 
+        @people << Teacher.new(person)
+      else
+        @people << Student.new(person)
+      end
+    end
+
+    rentals.each do |rental|
+      @rentals << Rental.new(rental)
+    end
+
   end
 
   def list_books
@@ -76,6 +110,19 @@ class App
     @rentals.each do |rent|
       puts "Date: #{rent.date}, Book: #{rent.book.title} Author: #{rent.book.author}" if rent.person.id == person_id
     end
+  end
+
+  def save_exit
+    puts 'Goodbye'
+    updated_books = []
+
+    @books.each do |book|
+      updated_books << {'title' => book.title, 'author' => book.author}
+    end
+
+    File.write('db/books.json', JSON.pretty_generate(updated_books))
+
+    exit
   end
 
   def invalid_option
