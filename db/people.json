@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "type": "Student",
+    "id": 580,
+    "name": "sdfsd",
+    "age": 345,
+    "parent_permission": false
+  },
+  {
+    "type": "Teacher",
+    "id": 145,
+    "name": "dsf",
+    "age": "432",
+    "specialization": "sdfd"
+  }
+]

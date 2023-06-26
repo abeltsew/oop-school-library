@@ -34,17 +34,16 @@ class App
     end
 
     people.each do |person|
-      if person.specialization 
-        @people << Teacher.new(person)
-      else
-        @people << Student.new(person)
-      end
+      @people << if person['type'] == 'Teacher'
+                   Teacher.new(person['age'], person['name'], person['specialization'], parent_permission: true)
+                 else
+                   Student.new(nil, person['age'], person['name'], parent_permission: person['parent_permission'])
+                 end
     end
 
     rentals.each do |rental|
       @rentals << Rental.new(rental)
     end
-
   end
 
   def list_books
@@ -117,10 +116,24 @@ class App
     updated_books = []
 
     @books.each do |book|
-      updated_books << {'title' => book.title, 'author' => book.author}
+      updated_books << { 'title' => book.title, 'author' => book.author }
     end
 
     File.write('db/books.json', JSON.pretty_generate(updated_books))
+
+    updated_people = []
+
+    @people.each do |person|
+      if person.instance_of?(::Teacher)
+        updated_people << { 'type' => 'Teacher', 'id' => person.id, 'name' => person.name, 'age' => person.age,
+                            'specialization' => person.specialization }
+      elsif person.instance_of?(::Student)
+        updated_people << { 'type' => 'Student', 'id' => person.id, 'name' => person.name, 'age' => person.age,
+                            'parent_permission' => person.parent_permission }
+      end
+    end
+
+    File.write('db/people.json', JSON.pretty_generate(updated_people))
 
     exit
   end
