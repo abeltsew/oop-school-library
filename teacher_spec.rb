@@ -10,7 +10,7 @@ describe Teacher do
   end
   context 'Check person creating task' do
     it 'should have the correct Age' do
-      new_teacher = Teacher.new( 24, 'Teacher2', 'BSC')
+      new_teacher = Teacher.new(24, 'Teacher2', 'BSC')
       expect(new_teacher.can_use_service?).to eq(true)
     end
   end
